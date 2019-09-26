@@ -1,6 +1,6 @@
 <template>
     <Box title="明細控制項">
-    <TableBase v-bind:tableData="noDelData">
+    <TableBase v-bind:tableData="noDelData" v-bind:dataObj="dataObj">
         <template slot="FirstHead">
             <th class="th-title w5">no</th>
             <th class="th-title w15">textNumber</th>
@@ -61,8 +61,8 @@ import DatePicker from '../components/DatePicker.vue'
 import CheckBox from '../components/CheckBox.vue'
 import RadioButton from '../components/RadioButton.vue'
 import TableBase from '../components/TableBase.vue'
-import tableData from '../data/table.json'
-import { mapGetters, mapMutations } from 'vuex'
+import dataObj from '../data/tableObj.json'
+import datas from '../data/table.json'
 
 export default {
     components: {
@@ -74,15 +74,15 @@ export default {
         RadioButton,
         TableBase
     },
-    mounted(){
-            tableData.forEach(element => {
-                this.initData(element)    
-            });
+    data() {
+        return {
+            datas,
+            dataObj
+        };
     },
-    methods:{...mapMutations('table',['initData'])
-    },
-    computed:{...mapGetters('table',['noDelData'])	
-
+    computed:{noDelData(){
+            return this.datas.filter(element => element.isdelete === 0)
+    }	
 }
 }
 </script>

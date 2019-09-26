@@ -15,7 +15,7 @@
                 </th>
             </tr>
         </thead>
-        <tbody v-for="(data,index) in tableData" v-bind:key="index">
+        <tbody v-for="(data,index) in datas" v-bind:key="index">
             <tr>
                 <slot name="FirstDetail" v-bind:data="data" v-bind:index="index"></slot>
                 <!-- 明細層右邊的按鈕 -->
@@ -56,26 +56,26 @@
     </table>
 </template>
 <script>
-import { mapGetters,mapMutations } from 'vuex'
 import tableData from '../data/codegentable.json'
 
 export default {
-        props:{tableData:Array},
+        props:{tableData:Array,dataObj:Object},
         data(){
-        return {isAllOpen: true}
+        return {isAllOpen: true,datas:[]}
         },
         mounted(){
-            // this.datas = this.tableData
+            this.datas = this.tableData
         },
-        methods:{...mapMutations('table',['setIsDetailOpen','addObject','delObject']),
+        methods:{
         setAllOpenStatus() {
                 this.isAllOpen = !this.isAllOpen
-                this.setIsDetailOpen(this.isAllOpen) 
+                this.datas.forEach(element => element.isDetailOpen = this.isAllOpen);
    //設定明細跟隨isAllOpen的狀態
             },
         addNewObject: function () {
-                    var no = this.dataLength
-                    this.addObject(tableData)                
+                    var no = this.datas.length
+                    this.dataObj.no = no
+                    this.datas.push(this.dataObj)
             },
         alertConfirm: function (no) {
         var text = `是否刪除，編號：${no} ?`
@@ -84,13 +84,13 @@ export default {
         this.$dialog
         .confirm(text)
         .then(function(dialog) {
-            self.delObject(no)
+            let delObj = this.datas.find(element => element.no === no)
+            delObj.isdelete = 1
         })
         .catch(function() {
             console.log('Clicked on cancel');
         });
      },
-    },
-    computed:{...mapGetters('table',['dataLength'])},
+    }
 }
 </script>

@@ -7,7 +7,7 @@
                     <b class="float-left">供應商</b>
                     <b class="required-icon">*</b>
                 </div>                    
-                <DisableText v-model="supplier" placeHolder="請點選右方【選擇】鈕選擇供應商"></DisableText>
+                <DisableText v-model="mainData.supplier" placeHolder="請點選右方【選擇】鈕選擇供應商"></DisableText>
             </div>         
             <div class="col-sm-1 content-box">
                 <div class="w100 title">
@@ -20,26 +20,26 @@
                     <b class="float-left">發票地點1</b>
                     <b class="required-icon">*</b>
                 </div>                    
-                <Selecter v-model="invoice"></Selecter>
+                <Selecter v-model="mainData.invoice"></Selecter>
             </div>         </div>
         <div class="row">        
             <div class="col-sm-3 content-box">
                 <div class="w100 title">
                     <b class="float-left">請購單號</b>
                 </div>                    
-                <Selecter v-model="purchaseId"></Selecter>
+                <Selecter v-model="mainData.purchaseId"></Selecter>
             </div>         
             <div class="col-sm-3 content-box">
                 <div class="w100 title">
                     <b class="float-left">報價經辦</b>
                 </div>                    
-                <Selecter v-model="quoteEmpId"></Selecter>
+                <Selecter v-model="mainData.quoteEmpId"></Selecter>
             </div>         
             <div class="col-sm-3 content-box">
                 <div class="w100 title">
                     <b class="float-left">請購單品名描述</b>
                 </div>                    
-                <TextString v-model="description" placeHolder="請填寫品名描述"></TextString>
+                <TextString v-model="mainData.description" placeHolder="請填寫品名描述"></TextString>
             </div>         
             <div class="col-sm-3 content-box">
                 <div class="w100 title">
@@ -52,7 +52,7 @@
     </Box>
     <Box title="table_查詢結果">
         
-    <TableBase v-bind:tableData="noDelData">
+    <TableBase v-bind:tableData="noDelData" v-bind:dataObj="dataObj">
         <template slot="FirstHead">
             <th class="th-title w5">no</th>
             <th class="th-title w15">選項按鈕</th>
@@ -137,27 +137,27 @@
                     <b class="float-left">選項按鈕</b>
                     <b class="required-icon">*</b>
                 </div>                    
-                <RadioButton v-model="supplier1"></RadioButton>
+                <RadioButton v-model="mainData.supplier1"></RadioButton>
             </div>         
             <div class="col-sm-3 content-box">
                 <div class="w100 title">
                     <b class="float-left">檢查按鈕</b>
                     <b class="required-icon">*</b>
                 </div>                    
-                <CheckBox v-model="choice1" title="檢查按鈕"></CheckBox>
+                <CheckBox v-model="mainData.choice1" title="檢查按鈕"></CheckBox>
             </div>         
             <div class="col-sm-3 content-box">
                 <div class="w100 title">
                     <b class="float-left">發票地點</b>
                     <b class="required-icon">*</b>
                 </div>                    
-                <Selecter v-model="invoice1"></Selecter>
+                <Selecter v-model="mainData.invoice1"></Selecter>
             </div>         
             <div class="col-sm-3 content-box">
                 <div class="w100 title">
                     <b class="float-left">日期欄位</b>
                 </div>                    
-                <DatePicker v-model="date1"></DatePicker>
+                <DatePicker v-model="mainData.date1"></DatePicker>
             </div>         </div>
     </Box>
 </SectionEdit>
@@ -178,7 +178,8 @@
     import { required } from 'vuelidate/lib/validators'
     import { mapGetters, mapMutations } from 'vuex'
     import mainData from '../data/codegen.json'
-    import tableData from '../data/codegentable.json'
+    import datas from '../data/codegentable.json'
+    import dataObj from '../data/codegenObj.json'
 
 export default {
             components: {
@@ -196,7 +197,7 @@ export default {
             TableBase
         },
         data() {
-            return mainData
+            return  {mainData,datas,dataObj}
         },
         validations:{
                 val:{
@@ -218,10 +219,12 @@ export default {
         },
         mounted(){
             console.log(this.$v.$reset())
-            this.initData(tableData)    
     },
-    computed:{...mapGetters('table',['noDelData'])},
-    methods:{...mapMutations('table',['initData']),
+    computed:{noDelData(){
+            return this.datas.filter(element => element.isdelete === 0)
+    }
+    },	
+    methods:{
             submit(){
                 this.submitted = true
             }
