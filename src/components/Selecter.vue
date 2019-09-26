@@ -7,6 +7,7 @@
 </template>
 
 <script>
+    import $ from 'jquery'
     import 'bootstrap-select/sass/bootstrap-select.scss'
     import 'bootstrap-select'
     import {myMixin} from '../common/library'    

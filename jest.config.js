@@ -14,7 +14,8 @@ module.exports = {
     '/node_modules/'
   ],
   moduleNameMapper: {
-    '^@/(.*)$': '<rootDir>/src/$1'
+    '^@/(.*)$': '<rootDir>/src/$1',
+    "\\.(scss|sass|css)$": "identity-obj-proxy"
   },
   snapshotSerializers: [
     'jest-serializer-vue'
@@ -26,5 +27,6 @@ module.exports = {
   watchPlugins: [
     'jest-watch-typeahead/filename',
     'jest-watch-typeahead/testname'
-  ]
+  ],
+  
 }

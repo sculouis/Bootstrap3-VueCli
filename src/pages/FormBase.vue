@@ -135,7 +135,7 @@ export default {
         },
         data() {
             return {
-                val: "",
+                val: "123",
                 numValue: "",
                 myDate:"",
                 check:false,

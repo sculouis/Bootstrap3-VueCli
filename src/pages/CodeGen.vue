@@ -104,11 +104,11 @@
 </td>
         </template>
         <template v-slot:ThirdHead="{ data }">
-            <th class="th-title-1">選項按鈕</th>
-            <th class="th-title-1">檢查按鈕</th>
-            <th class="th-title-1">發票地點</th>
-            <th class="th-title-1">文字欄位</th>
-            <th class="th-title-1">灰階欄位</th>
+            <th class="th-title-2">選項按鈕</th>
+            <th class="th-title-2">檢查按鈕</th>
+            <th class="th-title-2">發票地點</th>
+            <th class="th-title-2">文字欄位</th>
+            <th class="th-title-2">灰階欄位</th>
         </template>
         <template v-slot:ThirdDetail="{ subdata,index }">
                 <td>

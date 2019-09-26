@@ -8,6 +8,7 @@
 
 </template>
 <script>
+import $ from 'jquery'
 import '../style/bootstrap-datetimepicker.css'
 import 'moment'
 import  '../common/bootstrap-datetimepicker.min.js'

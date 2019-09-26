@@ -3,6 +3,7 @@
         <thead>
             <tr>
                 <slot name="FirstHead"></slot>
+                <!-- 最上層右邊的按鈕 -->
                 <th class="th-title w10">
                     Actions
                     <div class="btn-01-add"><a class="p-all0" v-on:click="setAllOpenStatus()">
@@ -17,6 +18,7 @@
         <tbody v-for="(data,index) in tableData" v-bind:key="index">
             <tr>
                 <slot name="FirstDetail" v-bind:data="data" v-bind:index="index"></slot>
+                <!-- 明細層右邊的按鈕 -->
                 <td>
                     <div class="btn-01-add ExpandDetail"><a v-on:click="data.isDetailOpen = !data.isDetailOpen">
                             <div class="glyphicon"
@@ -34,11 +36,13 @@
             </tr>
             <tr v-show="data.isDetailOpen">
                 <slot name="ThirdHead" v-bind:data="data"></slot>
-                <th class="th-title-1" colspan="2">
+                <!-- 最子層右邊的按鈕 -->
+                <th class="th-title-2" colspan="2">
                     子項目
                     <div class="btn-01-add float-right"><a v-on:click="data.isSubOpen = !data.isSubOpen"><span v-text="data.isSubOpen?'收合':'展開'"></span></a></div>
                 </th>
             </tr>
+                <!-- 不展開時的顯示畫面 -->
             <tr class="InnerDetailShowBar" v-show="data.isDetailOpen && !data.isSubOpen">
                 <td colspan="7" class="text-center">
                     <b class="undone-text">請展開檢視更多項目...</b>

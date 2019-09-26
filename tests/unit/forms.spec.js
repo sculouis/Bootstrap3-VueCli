@@ -4,28 +4,16 @@ import {
 } from '@vue/test-utils'
 import TextString from '@/components/TextString.vue'
 import TextNumber from '@/components/TextNumber.vue'
-
-const factory = (values = {}) => {
-  return shallowMount(TextString, {
-    data() {
-      return {
-        ...values
-      }
-    }
-  })
-}
+import DatePicker from '@/components/DatePicker'
+import Selecter from '@/components/Selecter'
 
 describe('測試TextString.vue', () => {
   it('renders val', () => {
-      const wrapper = factory({
-        val: 'input text',
-        small: false
-      })
-      wrapper.setProps({
-        smallSize: true
-      })
+      const wrapper = mount(TextString,{propsData: {
+        value: '測試輸入',
+        smallSize: false
+      }})
       console.log(wrapper.html())
-      expect(wrapper.contains('input')).toBe(true)
     }),
 
     it('props Data', () => {
@@ -39,7 +27,8 @@ describe('測試TextString.vue', () => {
           placeHolder
         },
       });
-      // wrapper.setData({val:"測試"})
+      wrapper.setData({val:"測試"})
+      expect(wrapper.vm.val).toEqual("測試")
       console.log(wrapper.vm.val)
     })
 })
@@ -74,3 +63,61 @@ describe('測試TextNumber.vue', () => {
       console.log(wrapper.html())
     })
 })
+
+describe('測試DatePicker.vue', () => {
+  it('props Data', () => {
+      const value = '2019-09-26'
+      const smallSize = true
+      const wrapper = shallowMount(DatePicker, {
+        propsData: {
+          value,
+          smallSize,
+        },
+      });
+      // wrapper.setData({val:"測試"})
+      expect(wrapper.vm.val).toBe('2019-09-26')
+      console.log(wrapper.vm.val)
+    }),
+    it('set Data', () => {
+      const wrapper = shallowMount(DatePicker, {
+        propsData: {
+          value: '2019-09-30'
+        }
+      });
+      wrapper.setData({
+        val: '2019-10-01'
+      })
+      expect(wrapper.vm.val).toBe( '2019-10-01')
+      console.log(wrapper.vm.val)
+      console.log(wrapper.html())
+    })
+})
+
+describe('測試Selecter.vue', () => {
+  it('props Data', () => {
+      const value = '1'
+      const smallSize = true
+      const wrapper = shallowMount(Selecter, {
+        propsData: {
+          value,
+          smallSize,
+        },
+      });
+      expect(wrapper.vm.val).toBe('1')
+      console.log(wrapper.vm.val)
+    }),
+    it('set Data', () => {
+      const wrapper = shallowMount(Selecter, {
+        propsData: {
+          value: '1'
+        }
+      });
+      wrapper.setData({
+        val: '2'
+      })
+      expect(wrapper.vm.val).toBe( '2')
+      console.log(wrapper.vm.val)
+      console.log(wrapper.html())
+    })
+})
+
