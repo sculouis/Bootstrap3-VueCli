@@ -15,7 +15,7 @@
                 </th>
             </tr>
         </thead>
-        <tbody v-for="(data,index) in datas" v-bind:key="index">
+        <tbody v-for="(data,index) in noDelDatas" v-bind:key="index">
             <tr>
                 <slot name="FirstDetail" v-bind:data="data" v-bind:index="index"></slot>
                 <!-- 明細層右邊的按鈕 -->
@@ -57,7 +57,7 @@
 </template>
 <script>
 import tableData from '../data/codegentable.json'
-
+import  _ from 'lodash'
 export default {
         props:{tableData:Array,dataObj:Object},
         data(){
@@ -66,6 +66,11 @@ export default {
         mounted(){
             this.datas = this.tableData
         },
+        computed:{
+            noDelDatas(){
+                    return this.datas.filter(element => element.isdelete === 0)
+            }
+        },
         methods:{
         setAllOpenStatus() {
                 this.isAllOpen = !this.isAllOpen
@@ -73,9 +78,10 @@ export default {
    //設定明細跟隨isAllOpen的狀態
             },
         addNewObject: function () {
-                    var no = this.datas.length
-                    this.dataObj.no = no
-                    this.datas.push(this.dataObj)
+                    let no = this.datas.length + 1
+                    var obj = _.cloneDeep(this.dataObj);  //深層複製
+                    obj.no = no
+                    this.datas.push(obj)
             },
         alertConfirm: function (no) {
         var text = `是否刪除，編號：${no} ?`
@@ -84,7 +90,7 @@ export default {
         this.$dialog
         .confirm(text)
         .then(function(dialog) {
-            let delObj = this.datas.find(element => element.no === no)
+            let delObj = self.datas.find(element => element.no === no)
             delObj.isdelete = 1
         })
         .catch(function() {

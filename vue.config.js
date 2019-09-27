@@ -1,7 +1,7 @@
 const webpack = require("webpack");
 
 module.exports = {
-// 設定全域物件
+    // 設定全域物件
     configureWebpack: {
         plugins: [
             new webpack.ProvidePlugin({
@@ -13,5 +13,6 @@ module.exports = {
               })
         ]
       },
-      publicPath:"./"
+
+    publicPath:'./'
 }
