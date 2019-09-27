@@ -54,7 +54,7 @@
         
     <TableBase v-bind:tableData="noDelData" v-bind:dataObj="dataObj">
         <template slot="FirstHead">
-            <th class="th-title w5">no</th>
+            <th class="th-title w5">編號</th>
             <th class="th-title w15">選項按鈕</th>
             <th class="th-title w15">檢查按鈕</th>
             <th class="th-title w15">發票地點</th>
