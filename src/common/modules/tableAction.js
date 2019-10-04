@@ -1,3 +1,5 @@
+import axios from "axios"
+const url = "https://louis-chen-webapi.netlify.com/.netlify/functions/server/datas"
 const    state = {
         "model": []
     }
@@ -14,7 +16,7 @@ const  getters ={
 const  mutations = {
         //取得初始資料
         initData(state, data) {
-            state.model.push(data)
+            state.model = data
         },
         delObject(state, no) {
             let delObj = state.model.find(element => element.no === no)
@@ -28,9 +30,21 @@ const  mutations = {
         }
     }
 
+const actions = {
+        //取得初始資料
+        initData(context) {
+            axios.get(url)
+            .then(response => {
+                context.commit("initData",response)
+            })
+            .catch(err => console.log(err))
+        },
+}    
+
 export default{
     namespaced: true,
     state,
     mutations,
     getters,
+    actions
 }

@@ -62,7 +62,7 @@ import CheckBox from '../components/CheckBox.vue'
 import RadioButton from '../components/RadioButton.vue'
 import TableBase from '../components/TableBase.vue'
 import dataObj from '../data/tableObj.json'
-import datas from '../data/table.json'
+import { mapGetters,mapActions,mapMutations } from 'vuex'
 
 export default {
     components: {
@@ -76,14 +76,14 @@ export default {
     },
     data() {
         return {
-            datas,
             dataObj
         };
     },
-    computed:{noDelData(){
-            return this.datas.filter(element => element.isdelete === 0)
-    }	
-}
+    mounted(){
+        this.initData()
+    },
+    computed:{...mapGetters('tableAction',['noDelData'])},	    
+    methods:{...mapActions('tableAction',['initData'])}
 }
 </script>
 
