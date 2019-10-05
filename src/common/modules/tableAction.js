@@ -1,5 +1,5 @@
 import axios from "axios"
-const url = "https://louis-chen-webapi.netlify.com/.netlify/functions/server/datas"
+const url = "/api/datas"
 const    state = {
         "model": []
     }
