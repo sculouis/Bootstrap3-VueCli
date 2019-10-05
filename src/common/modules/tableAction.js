@@ -33,7 +33,10 @@ const  mutations = {
 const actions = {
         //取得初始資料
         initData(context) {
-            axios.get(url)
+            var config = {
+                headers: {'Access-Control-Allow-Origin': '*'}
+            };
+            axios.get(url,config)
             .then(response => {
                 context.commit("initData",response)
             })
