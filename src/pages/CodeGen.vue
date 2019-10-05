@@ -176,7 +176,6 @@
     import Popup from '../components/Popup.vue'
     import TableBase from '../components/TableBase.vue'
     import { required } from 'vuelidate/lib/validators'
-    import { mapGetters, mapMutations } from 'vuex'
     import mainData from '../data/codegen.json'
     import datas from '../data/codegentable.json'
     import dataObj from '../data/codegenObj.json'
