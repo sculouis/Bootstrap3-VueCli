@@ -1,5 +1,5 @@
 import axios from "axios"
-const url = "https://louis-chen-webapi.netlify.com/.netlify/functions/server/datas"
+const url = "/api/datas"
 const    state = {
         "model": []
     }
@@ -33,10 +33,7 @@ const  mutations = {
 const actions = {
         //取得初始資料
         initData(context) {
-            var config = {
-                headers: {'Access-Control-Allow-Origin': '*'}
-            };
-            axios.get(url,config)
+            axios.get(url)
             .then(response => {
                 context.commit("initData",response)
             })
