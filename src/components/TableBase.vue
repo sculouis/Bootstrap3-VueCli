@@ -68,7 +68,7 @@ export default {
         },
         computed:{
             noDelDatas(){
-                    return this.datas.filter(element => element.isdelete === 0)
+                    return this.tableData.filter(element => element.isdelete === 0)
             }
         },
         methods:{

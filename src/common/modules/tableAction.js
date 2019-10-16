@@ -1,5 +1,5 @@
 import axios from "axios"
-const url = "/api/datas"
+const url = "/api/datas/"
 const    state = {
         "model": []
     }
@@ -15,8 +15,8 @@ const  getters ={
     //註冊要update值的方法類似event,用commit呼叫
 const  mutations = {
         //取得初始資料
-        initData(state, data) {
-            state.model = data
+        initData(state, res) {
+            state.model = res.data
         },
         delObject(state, no) {
             let delObj = state.model.find(element => element.no === no)
