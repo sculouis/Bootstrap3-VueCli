@@ -59,7 +59,7 @@
 import tableData from '../data/codegentable.json'
 import  _ from 'lodash'
 export default {
-        props:{tableData:Array,dataObj:Object,addObject:Function,delObject:Function},
+        props:{tableData:Array,dataObj:Object},
         data(){
         return {isAllOpen: true,datas:[]}
         },
@@ -84,7 +84,7 @@ export default {
                     obj.no = no
                     // this.datas.push(obj)
                     $.blockUI({message:"資料讀取中...."})
-                    this.addObject(obj)
+                    this.$emit("addObject",obj)
             },
         alertConfirm: function (no) {
         var text = `是否刪除，編號：${no} ?`
@@ -93,10 +93,10 @@ export default {
         this.$dialog
         .confirm(text)
         .then(function(dialog) {
-            let delObj = self.datas.find(element => element.no === no)
-            delObj.isdelete = 1
+            let obj = self.datas.find(element => element.no === no)
+            obj.isdelete = 1
             $.blockUI({message:"資料讀取中...."})
-            self.delObject(delObj)
+            self.$emit("delObject",obj)
         })
         .catch(function() {
             console.log('Clicked on cancel');

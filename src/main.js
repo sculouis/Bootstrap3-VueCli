@@ -26,6 +26,8 @@ import Vuelidate from 'vuelidate'
 
 //blockUI
 import './common/jquery.blockUI.js'
+// import './common/form-ui.js'
+
 
 // Tell Vue to install the plugin.
 const routes = [

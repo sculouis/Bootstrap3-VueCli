@@ -1,6 +1,6 @@
 <template>
     <Box title="明細控制項">
-    <TableBase v-bind:tableData="noDelData" v-bind:dataObj="dataObj" v-bind:addObject="addData" v-bind:delObject="delData" >
+    <TableBase v-bind:tableData="noDelData" v-bind:dataObj="dataObj" v-on:addObject="addData" v-on:delObject="delData" >
         <template slot="FirstHead">
             <th class="th-title w5">no</th>
             <th class="th-title w15">textNumber</th>
