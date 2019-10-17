@@ -10,7 +10,7 @@ import Selecter from '@/components/Selecter'
 describe('測試TextString.vue', () => {
   it('renders val', () => {
       const wrapper = mount(TextString,{propsData: {
-        value: '測試輸入',
+        value: '測試輸入值',
         smallSize: false
       }})
       console.log(wrapper.html())
