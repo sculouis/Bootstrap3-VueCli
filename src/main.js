@@ -24,6 +24,9 @@ import TableAction from './pages/TableAction.vue'
 import CodeGen from './pages/CodeGen.vue'
 import Vuelidate from 'vuelidate'
 
+//blockUI
+import './common/jquery.blockUI.js'
+
 // Tell Vue to install the plugin.
 const routes = [
   { path: '/codegen', component: CodeGen },

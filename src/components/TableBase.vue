@@ -83,6 +83,7 @@ export default {
                     var obj = _.cloneDeep(this.dataObj);  //深層複製
                     obj.no = no
                     // this.datas.push(obj)
+                    $.blockUI({message:"資料讀取中...."})
                     this.addObject(obj)
             },
         alertConfirm: function (no) {
@@ -94,6 +95,7 @@ export default {
         .then(function(dialog) {
             let delObj = self.datas.find(element => element.no === no)
             delObj.isdelete = 1
+            $.blockUI({message:"資料讀取中...."})
             self.delObject(delObj)
         })
         .catch(function() {

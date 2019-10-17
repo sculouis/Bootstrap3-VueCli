@@ -80,6 +80,7 @@ export default {
         };
     },
     mounted(){
+        $.blockUI({message:"資料讀取中...."})
         this.initData()
     },
     computed:{...mapGetters('tableAction',['noDelData'])},	    

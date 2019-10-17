@@ -21,13 +21,16 @@ const  mutations = {
         //取得初始資料
         initData(state, res) {
             state.model = res.data
+            $.unblockUI('')
         },
         delObject(state, no) {
             let delObj = state.model.find(element => element.no === no)
             delObj.isdelete = 1
+            $.unblockUI('')
         },
         addObject(state, obj) {
             state.model.push(obj)
+            $.unblockUI('')
         },
         setIsDetailOpen(state, objBool) {
             state.model.forEach(element => element.isDetailOpen = objBool);
