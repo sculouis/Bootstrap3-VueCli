@@ -59,7 +59,7 @@
 import tableData from '../data/codegentable.json'
 import  _ from 'lodash'
 export default {
-        props:{tableData:Array,dataObj:Object},
+        props:{tableData:Array,dataObj:Object,addObject:Function,delObject:Function},
         data(){
         return {isAllOpen: true,datas:[]}
         },
@@ -68,7 +68,8 @@ export default {
         },
         computed:{
             noDelDatas(){
-                    return this.tableData.filter(element => element.isdelete === 0)
+                    this.datas = this.tableData
+                    return this.datas.filter(element => element.isdelete === 0)
             }
         },
         methods:{
@@ -81,7 +82,8 @@ export default {
                     let no = this.datas.length + 1
                     var obj = _.cloneDeep(this.dataObj);  //深層複製
                     obj.no = no
-                    this.datas.push(obj)
+                    // this.datas.push(obj)
+                    this.addObject(obj)
             },
         alertConfirm: function (no) {
         var text = `是否刪除，編號：${no} ?`
@@ -92,6 +94,7 @@ export default {
         .then(function(dialog) {
             let delObj = self.datas.find(element => element.no === no)
             delObj.isdelete = 1
+            self.delObject(delObj)
         })
         .catch(function() {
             console.log('Clicked on cancel');

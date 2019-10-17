@@ -1,5 +1,7 @@
 import axios from "axios"
 const url = "/api/datas/"
+const urladd = "/api/"
+const urldel= "/api/delete"
 const    state = {
         "model": []
     }
@@ -39,6 +41,26 @@ const actions = {
             })
             .catch(err => console.log(err))
         },
+        addData(context,obj) {
+            axios.post(urladd,obj)
+            .then(response => {
+                console.log(`add data response:${response}`)
+                context.commit("addObject",obj)
+            })
+            .catch(err => console.log(err))
+        },
+        delData(context,obj) {
+            axios.delete(urldel, {data:{
+                no:obj.no
+              }})
+            .then(response => {
+                console.log(`delete data response:${response}`)
+                context.commit("delObject",obj.no)
+            })
+            .catch(err => console.log(err))
+        },
+
+
 }    
 
 export default{
