@@ -1,5 +1,6 @@
 import axios from "axios"
-const url = "/api/datas/"
+// const url = "/api/datas"
+const url = "https://louis-chen-webapi.netlify.com/.netlify/functions/server/datas"
 const urladd = "/api/"
 const urldel= "/api/delete"
 const    state = {
@@ -41,6 +42,7 @@ const actions = {
             })
             .catch(err => console.log(err))
         },
+        // 新增一筆資料
         addData(context,obj) {
             axios.post(urladd,obj)
             .then(response => {
@@ -49,6 +51,7 @@ const actions = {
             })
             .catch(err => console.log(err))
         },
+        //刪除資料
         delData(context,obj) {
             axios.delete(urldel, {data:{
                 no:obj.no
@@ -59,8 +62,6 @@ const actions = {
             })
             .catch(err => console.log(err))
         },
-
-
 }    
 
 export default{

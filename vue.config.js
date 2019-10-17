@@ -13,13 +13,13 @@ module.exports = {
               })
         ]
       },
-    publicPath:'./',
-    devServer: {
-        proxy: {
-          '/api': {
-            target: 'https://louis-chen-webapi.netlify.com/.netlify/functions/server',
-            pathRewrite: { '^/api': '' }
-          }
-        }
-      }
+    // publicPath:'./',
+    // devServer: {
+    //     proxy: {
+    //       '/api': {
+    //         target: 'https://louis-chen-webapi.netlify.com/.netlify/functions/server',
+    //         pathRewrite: { '^/api': '' }
+    //       }
+    //     }
+    //   }
 }
