@@ -1,8 +1,9 @@
 import axios from "axios"
 // const url = "/api/datas"
-const url = "https://louis-chen-webapi.netlify.com/.netlify/functions/server/datas"
-const urladd = "/api/"
-const urldel= "/api/delete"
+const url = "https://louis-chen-webapi.netlify.com/.netlify/functions/server/"
+const urlalldatas = url + "datas"
+const urladd = url
+const urldel=  url + "delete"
 const    state = {
         "model": []
     }
@@ -36,7 +37,7 @@ const  mutations = {
 const actions = {
         //取得初始資料
         initData(context) {
-            axios.get(url)
+            axios.get(urlalldatas)
             .then(response => {
                 context.commit("initData",response)
             })
