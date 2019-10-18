@@ -12,8 +12,14 @@
             <div class="col-sm-1 content-box">
                 <div class="w100 title">
                     <b class="float-left">選擇</b>
-                </div>                    
-                <Popup bgColor="btn-02-blue"  iconName="icon-search"  remodalId="choice" title="彈出視窗">選擇</Popup>
+                </div> 
+                <Remodal remodalId="remodal-02" title="供應商查詢">
+                    <div class="col-sm-12 m-top10">
+                        <div class="popup-input-title">簽核意見(最多50字)</div>
+                        <textarea class="tt resize-none" id="remodalSendDescription" placeholder="請填寫意見說明"></textarea>
+                    </div>
+                </Remodal> 
+                <ButtonAction bgColor="btn-02-blue"  iconName="icon-search" @click="openRemodal('remodal-02')">客制化Remodal</ButtonAction>
             </div>         
             <div class="col-sm-8 content-box">
                 <div class="w100 title">
@@ -174,13 +180,14 @@
     import CheckBox from '../components/CheckBox.vue'
     import RadioButton from '../components/RadioButton.vue'
     import ButtonAction from '../components/ButtonAction.vue'
+    import Remodal from '../components/Remodal.vue'
     import DisableText from '../components/DisableText.vue'
-    import Popup from '../components/Popup.vue'
     import TableBase from '../components/TableBase.vue'
     import { required } from 'vuelidate/lib/validators'
     import mainData from '../data/codegen.json'
     import datas from '../data/codegentable.json'
     import dataObj from '../data/codegenObj.json'
+    import { mapMutations } from 'vuex'
 
 export default {
             components: {
@@ -193,8 +200,8 @@ export default {
             CheckBox,
             RadioButton,
             ButtonAction,
+            Remodal,
             DisableText,
-            Popup,
             TableBase
         },
         data() {
@@ -225,7 +232,7 @@ export default {
             return this.datas.filter(element => element.isdelete === 0)
     }
     },	
-    methods:{
+    methods:{...mapMutations('forms',['openRemodal']),
             submit(){
                 this.submitted = true
             }

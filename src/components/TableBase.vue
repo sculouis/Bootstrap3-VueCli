@@ -84,7 +84,7 @@ export default {
                     obj.no = no
                     // this.datas.push(obj)
                     $.blockUI({message:"資料讀取中...."})
-                    this.$emit("addObject",obj)
+                    this.$emit("addObject",obj)   //父元件決定如何處理
             },
         alertConfirm: function (no) {
         var text = `是否刪除，編號：${no} ?`
@@ -96,7 +96,7 @@ export default {
             let obj = self.datas.find(element => element.no === no)
             obj.isdelete = 1
             $.blockUI({message:"資料讀取中...."})
-            self.$emit("delObject",obj)
+            self.$emit("delObject",obj)   //父元件決定如何處理
         })
         .catch(function() {
             console.log('Clicked on cancel');

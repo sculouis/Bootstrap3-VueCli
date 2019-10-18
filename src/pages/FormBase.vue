@@ -37,18 +37,24 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-sm-4 m-top20">
+                <div class="col-sm-6 m-top20">
                         <!-- btn-02-blue,btn-02-gray -->
                         <div class="area-1">
                             <ButtonAction bgColor="btn-02-gray"  iconName="glyphicon glyphicon-remove" @click="submit()">Submit</ButtonAction>
-                            <Popup bgColor="btn-02-blue"  iconName="icon-search"  remodalId="modal-01" title="供應商查詢">彈出視窗一</Popup>
-                            <Remodal remodalId="myremodal" title="客制化">
+                            <Remodal remodalId="remodal-02" title="供應商查詢">
                                 <div class="col-sm-12 m-top10">
                                     <div class="popup-input-title">簽核意見(最多50字)</div>
                                     <textarea class="tt resize-none" id="remodalSendDescription" placeholder="請填寫意見說明"></textarea>
                                 </div>
                             </Remodal> 
-                            <ButtonAction bgColor="btn-02-blue"  iconName="icon-search" @click="openRemodal('myremodal')">客制化Remodal</ButtonAction>
+                            <ButtonAction bgColor="btn-02-blue"  iconName="icon-search" @click="openRemodal('remodal-02')">客制化Remodal</ButtonAction>
+                            <Remodal remodalId="remodal-03" title="客制化">
+                                <div class="col-sm-12 m-top10">
+                                    <div class="popup-input-title">簽核意見(最多50字)</div>
+                                    <textarea class="tt resize-none" id="remodalSendDescription" placeholder="請填寫意見說明"></textarea>
+                                </div>
+                            </Remodal> 
+                            <ButtonAction bgColor="btn-02-blue"  iconName="icon-search" @click="openRemodal('remodal-03')">客制化Remodal</ButtonAction>
                         </div>
                         <!-- icon-search,icon-plus,glyphicon glyphicon-remove- -->
                 </div>
@@ -69,7 +75,6 @@
     import RadioButton from '../components/RadioButton.vue'
     import ButtonAction from '../components/ButtonAction.vue'
     import DisableText from '../components/DisableText.vue'
-    import Popup from '../components/Popup.vue'
     import Remodal from '../components/Remodal.vue'
     import { required } from 'vuelidate/lib/validators'
     import { mapMutations } from 'vuex'
@@ -86,7 +91,6 @@ export default {
             RadioButton,
             ButtonAction,
             DisableText,
-            Popup,
             Remodal
         },
         data() {
