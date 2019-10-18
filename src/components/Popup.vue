@@ -1,7 +1,8 @@
 <template>
     <div>
-        <ButtonAction :bgColor="bgColor"  :iconName="iconName" @click="openRemodal(remodalId)">{{buttonName}}</ButtonAction>
-        <Remodal :remodalId="remodalId" :title="title"></Remodal> 
+        <ButtonAction :bgColor="bgColor"  :iconName="iconName" @click="openRemodal(remodalId)"><slot></slot></ButtonAction>
+        <Remodal :remodalId="remodalId" :title="title">
+        </Remodal> 
     </div>        
 </template>
 <script>
@@ -10,7 +11,7 @@
     import { mapMutations } from 'vuex'
 export default {
     components:{ButtonAction,Remodal},
-    props:{bgColor:String,iconName:String,remodalId:String,buttonName:String,title:String},
+    props:{bgColor:String,iconName:String,remodalId:String,title:String},
     methods:{...mapMutations('forms',['openRemodal'])}
 }
 </script>

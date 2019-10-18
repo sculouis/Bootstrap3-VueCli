@@ -13,7 +13,7 @@
                 <div class="w100 title">
                     <b class="float-left">選擇</b>
                 </div>                    
-                <Popup bgColor="btn-02-blue"  iconName="icon-search"  remodalId="choice" title="彈出視窗" buttonName="按鈕"></Popup>
+                <Popup bgColor="btn-02-blue"  iconName="icon-search"  remodalId="choice" title="彈出視窗">選擇</Popup>
             </div>         
             <div class="col-sm-8 content-box">
                 <div class="w100 title">
@@ -21,7 +21,8 @@
                     <b class="required-icon">*</b>
                 </div>                    
                 <Selecter v-model="mainData.invoice"></Selecter>
-            </div>         </div>
+            </div>         
+    </div>
         <div class="row">        
             <div class="col-sm-3 content-box">
                 <div class="w100 title">
@@ -48,7 +49,8 @@
                 </div>                    
                     <ButtonAction bgColor="btn-02-gray"  iconName="glyphicon glyphicon-remove">清除</ButtonAction>
                     <ButtonAction bgColor="btn-02-blue"  iconName="icon-search">查詢</ButtonAction>
-            </div>         </div>
+            </div>         
+            </div>
     </Box>
     <Box title="table_查詢結果">
         

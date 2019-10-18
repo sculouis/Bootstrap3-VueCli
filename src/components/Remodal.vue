@@ -6,14 +6,12 @@
             <span id="modal1Title" class="popup-title-left" v-text="title"></span>
         </div>
         <div class="popup-box">
-            <div class="col-sm-12 text-left border">
                 <slot></slot>    
-            </div>
         </div>
         <div class="col-sm-12">
             <div class="popup-btn-row">
-                <a data-remodal-action="cancel" class="remodal-cancel-btn">取消</a>
-                <a data-remodal-action="confirm" class="remodal-confirm-btn">確認</a>
+                <a data-remodal-action="cancel" class="remodal-cancel-btn" v-on:click="cancel($event)">取消</a>
+                <a data-remodal-action="confirm" class="remodal-confirm-btn" v-on:click="confirm($event)">確認</a>
             </div>
         </div>
     </div>
@@ -22,7 +20,21 @@
 import 'remodal/dist/remodal-default-theme.css'
 import 'remodal/dist/remodal.css'
 import 'remodal/dist/remodal.min.js'
+import { METHODS } from 'http';
 export default {
     props:{remodalId:String,title:String},
+    data(){
+        return {}
+    },
+    methods:{
+        confirm(e){
+            console.log(`press confirm button -> remodalId:${this.remodalId}`)
+            console.log(e)
+        },
+        cancel(e){
+            console.log(`press cancel button -> remodalId:${this.remodalId}`)
+            console.log(e)
+        }
+    }
 }
 </script>

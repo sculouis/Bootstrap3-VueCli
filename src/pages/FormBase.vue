@@ -41,67 +41,20 @@
                         <!-- btn-02-blue,btn-02-gray -->
                         <div class="area-1">
                             <ButtonAction bgColor="btn-02-gray"  iconName="glyphicon glyphicon-remove" @click="submit()">Submit</ButtonAction>
-                            <ButtonAction bgColor="btn-02-blue"  iconName="icon-search"  remodalId="modal-01">彈出視窗</ButtonAction>
-                            <ButtonAction bgColor="btn-02-blue"  iconName="icon-search"  remodalId="modal-02">彈出視窗</ButtonAction>
+                            <Popup bgColor="btn-02-blue"  iconName="icon-search"  remodalId="modal-01" title="供應商查詢">彈出視窗一</Popup>
+                            <Remodal remodalId="myremodal" title="客制化">
+                                <div class="col-sm-12 m-top10">
+                                    <div class="popup-input-title">簽核意見(最多50字)</div>
+                                    <textarea class="tt resize-none" id="remodalSendDescription" placeholder="請填寫意見說明"></textarea>
+                                </div>
+                            </Remodal> 
+                            <ButtonAction bgColor="btn-02-blue"  iconName="icon-search" @click="openRemodal('myremodal')">客制化Remodal</ButtonAction>
                         </div>
                         <!-- icon-search,icon-plus,glyphicon glyphicon-remove- -->
                 </div>
             </div>
             <pre style="margin-top: 25px">{{$v}}</pre>
         </Box>
-        <Remodal remodalId="modal-01" title="彈出視窗一">
-                <div class="col-sm-12">
-                    <div class="popup-tr-title">
-                        <ul class="w100">
-                            <li>
-                                <label class="w100 label-box">
-                                    <div class="table-box w30">編號</div>
-                                    <div class="table-box w15">設備分類</div>
-                                    <div class="table-box w15">設備經辦</div>
-                                    <div class="table-box w15">設備名稱</div>
-                                    <div class="table-box w25">說明</div>
-                                </label>
-
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="popup-tbody h160 overflow-auto">
-                        <ul class="w100 ">
-                            <li>
-                                <label class="w100 label-box">
-                                    <div class="table-box w30"><input name="www" type="checkbox">12544-201723240720
-                                    </div>
-                                    <div class="table-box w15">E09-NET-其他</div>
-                                    <div class="table-box w15">王 曉明</div>
-                                    <div class="table-box w15">Power 750</div>
-                                    <div class="table-box w25">跨行系統</div>
-                                </label>
-                            </li>
-                            <li>
-                                <label class="w100 label-box">
-                                    <div class="table-box w30"><input name="www" type="checkbox">12544-201723240720
-                                    </div>
-                                    <div class="table-box w15">E09-NET-其他</div>
-                                    <div class="table-box w15">王 曉明</div>
-                                    <div class="table-box w15">Power 750</div>
-                                    <div class="table-box w25">跨行系統</div>
-                                </label>
-                            </li>
-                            <li>
-                                <label class="w100 label-box">
-                                    <div class="table-box w30"><input name="www" type="checkbox">12544-201723240720
-                                    </div>
-                                    <div class="table-box w15">E09-NET-其他</div>
-                                    <div class="table-box w15">王 曉明</div>
-                                    <div class="table-box w15">Power 750</div>
-                                    <div class="table-box w25">跨行系統</div>
-                                </label>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-        </Remodal>
-        <Remodal remodalId="modal-02" title="彈出視窗二"></Remodal>
     </SectionEdit>    
 </template>
 
@@ -114,10 +67,12 @@
     import DatePicker from '../components/DatePicker.vue'
     import CheckBox from '../components/CheckBox.vue'
     import RadioButton from '../components/RadioButton.vue'
-    import Remodal from '../components/Remodal.vue'
     import ButtonAction from '../components/ButtonAction.vue'
     import DisableText from '../components/DisableText.vue'
+    import Popup from '../components/Popup.vue'
+    import Remodal from '../components/Remodal.vue'
     import { required } from 'vuelidate/lib/validators'
+    import { mapMutations } from 'vuex'
 
 export default {
             components: {
@@ -129,9 +84,10 @@ export default {
             DatePicker,
             CheckBox,
             RadioButton,
-            Remodal,
             ButtonAction,
-            DisableText
+            DisableText,
+            Popup,
+            Remodal
         },
         data() {
             return {
@@ -164,7 +120,7 @@ export default {
         mounted(){
             console.log(this.$v.$reset())
         },
-        methods:{
+        methods:{...mapMutations('forms',['openRemodal']),
             submit(){
                 this.submitted = true
                 console.log(`輸入檢查不合法：${this.$v.$invalid}`)
