@@ -122,7 +122,7 @@ export default {
             }
         },
         mounted(){
-            console.log(this.$v.$reset())
+            this.$v.$reset()
         },
         methods:{...mapMutations('forms',['openRemodal']),
             submit(){

@@ -1,6 +1,12 @@
 <template>
+<div>
+<QuickTo>
+    <a href="#PRDetailSearchBlock">請購單查詢明細區</a>
+    <a href="#POResultBlock">採購資訊區</a>
+    <a href="#PODetailBlock">採購明細區</a>
+</QuickTo>
 <SectionEdit title="文件資訊">
-    <Box title="請購單查詢明細區">
+    <Box title="請購單查詢明細區" id="PRDetailSearchBlock">
         <div class="row">        
             <div class="col-sm-3 content-box">
                 <div class="w100 title">
@@ -58,8 +64,7 @@
             </div>         
             </div>
     </Box>
-    <Box title="table_查詢結果">
-        
+    <Box title="table_查詢結果" id="POResultBlock">
     <TableBase v-bind:tableData="noDelData" v-bind:dataObj="dataObj">
         <template slot="FirstHead">
             <th class="th-title w5">編號</th>
@@ -138,7 +143,7 @@
         </TableBase>
 
     </Box>
-    <Box title="採購單主檔">
+    <Box title="採購單主檔" id="PODetailBlock">
         <div class="row">        
             <div class="col-sm-3 content-box">
                 <div class="w100 title">
@@ -169,6 +174,7 @@
             </div>         </div>
     </Box>
 </SectionEdit>
+</div>
 </template>
 <script>
     import SectionEdit from '../components/SectionEdit.vue'
@@ -183,6 +189,7 @@
     import Remodal from '../components/Remodal.vue'
     import DisableText from '../components/DisableText.vue'
     import TableBase from '../components/TableBase.vue'
+    import QuickTo from '../components/QuickTo.vue'
     import { required } from 'vuelidate/lib/validators'
     import mainData from '../data/codegen.json'
     import datas from '../data/codegentable.json'
@@ -202,7 +209,8 @@ export default {
             ButtonAction,
             Remodal,
             DisableText,
-            TableBase
+            TableBase,
+            QuickTo
         },
         data() {
             return  {mainData,datas,dataObj}
@@ -226,7 +234,7 @@ export default {
             }
         },
         mounted(){
-            console.log(this.$v.$reset())
+            this.$v.$reset()
     },
     computed:{noDelData(){
             return this.datas.filter(element => element.isdelete === 0)

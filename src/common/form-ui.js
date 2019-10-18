@@ -127,7 +127,7 @@ $(".cr-search-box").on("click", function () {
 
 /*-- 側欄選單-1 --*/
 $(function ($) {
-    $('#MENUICON-close').hide();
+    $('#MENUICON').show(); $('#MENUICON-close').hide();
     var $win = $(window),
         $MENU = $('#MENU'),
         MENUHeight = $('#MENU').outerHeight(true),
