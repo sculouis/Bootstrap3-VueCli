@@ -111,8 +111,8 @@
                                 收貨單位
                             </th>
                         </template>
-                        <template v-slot:ThirdDetail="{ subdata,index }">
-                            <td colspan="2" ><input type="checkbox" class="InnerDetailCheckbox" v-model="subdata.raChk" />{{subdata.receiveAmount}}</td>
+                        <template v-slot:ThirdDetail="{data, subdata,index }">
+                            <td colspan="2" ><input type="checkbox" class="InnerDetailCheckbox" v-model="subdata.raChk"  @change="deliveryChange(data,subdata)"/>{{subdata.receiveAmount}}</td>
                             <td colspan="2" v-text="subdata.paymentDep"></td>
                             <td colspan="4" v-text="subdata.receiveDep"></td>
                         </template>
@@ -203,6 +203,11 @@ export default {
         console.log(`供應商選擇結果：${sel.value} - ${sel.text}`)
         $.blockUI({message:"供應商住址讀取中...."})
         this.getAddress()
+    },
+    deliveryChange(data,subdata){
+        if (subdata.raChk === false){
+            data.sel = false
+        }
     }
     },
     computed:{...mapGetters('po',['noDelData','addressDatas','prDatas','quoteDatas','supplierDatas'])}

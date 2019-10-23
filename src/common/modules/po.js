@@ -24,11 +24,18 @@ const  getters ={
                 }
             });
             //明細取消選擇後送貨層資料全部取消選擇
-            state.model.forEach(element => {
-                if (element.sel === false){
-                     element.subDatas.forEach(item => item.raChk = false)       
-                }
-            });
+            // state.model.forEach(element => {
+            //     if (element.sel === false){
+            //          element.subDatas.forEach(item => item.raChk = false)       
+            //     }
+            // });
+            // state.model.forEach(element => {
+            //          element.subDatas.forEach(item => {
+            //              if (item.raChk === false){
+            //                  element.sel = false
+            //              }
+            //             })       
+            // });
             return state.model.filter(element => element.isdelete === 0)
         },
         //供應商資料

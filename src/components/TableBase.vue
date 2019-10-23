@@ -55,7 +55,7 @@
             </tr>
             <tr v-for="(subdata,index) in data.subDatas" v-show="data.isDetailOpen && data.isSubOpen"
                 v-bind:key="index">
-                <slot name="ThirdDetail" v-bind:subdata="subdata" v-bind:index="index"></slot>
+                <slot name="ThirdDetail" v-bind:data="data" v-bind:subdata="subdata" v-bind:index="index"></slot>
             </tr>
         </tbody>
     </table>
