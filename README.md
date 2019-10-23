@@ -1,6 +1,9 @@
-# hello-world
+# E 的 Form component
+* 各個component皆放在components目錄
+* 撰寫個頁面功能皆放在pages目錄
 
-## Project setup
+
+### Project setup
 ```
 npm install
 ```

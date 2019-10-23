@@ -21,7 +21,7 @@ import store from './common/store'
 import App from './pages/App.vue';
 import FormBase from './pages/FormBase.vue'
 import TableAction from './pages/TableAction.vue'
-import CodeGen from './pages/CodeGen.vue'
+import PurchaseOrder from './pages/PurchaseOrder'
 import Vuelidate from 'vuelidate'
 
 //blockUI
@@ -31,7 +31,7 @@ import './common/form-ui.js'
 
 // Tell Vue to install the plugin.
 const routes = [
-  { path: '/codegen', component: CodeGen },
+  { path: '/purchaseorder', component: PurchaseOrder},
   { path: '/formbase', component: FormBase },
   { path: '/table', component: TableAction }
 ]

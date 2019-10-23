@@ -5,11 +5,10 @@
                 <slot name="FirstHead"></slot>
                 <!-- 最上層右邊的按鈕 -->
                 <th class="th-title w10">
-                    Actions
                     <div class="btn-01-add"><a class="p-all0" v-on:click="setAllOpenStatus()">
                             <div v-bind:class="[isAllOpen?'list-close-icon':'list-open-icon']"></div>
                         </a></div>
-                    <div class="p-left5 btn-01-add"><a v-on:click="addNewObject()">
+                    <div class="p-left5 btn-01-add" v-show="addIcon"><a v-on:click="addNewObject()">
                             <div class="icon-plus bt-icon-size-1"></div>
                         </a></div>
                 </th>
@@ -25,26 +24,32 @@
                                 v-bind:class="[data.isDetailOpen?'glyphicon-chevron-up':'glyphicon-chevron-down']">
                             </div>
                         </a></div>
-                    <div class="icon-cross icon-remove-size" v-on:click="alertConfirm(data.no)"></div>
+                    <div class="icon-cross icon-remove-size" v-on:click="alertConfirm(data.no)" v-show="delIcon"></div>
                 </td>
             </tr>
-            <tr v-show="data.isDetailOpen">
-                <slot name="SecondDetailHead" v-bind:data="data"></slot>
-            </tr>
-            <tr v-show="data.isDetailOpen">
-                <slot name="SecondDetail" v-bind:data="data"></slot>
-            </tr>
-            <tr v-show="data.isDetailOpen">
-                <slot name="ThirdHead" v-bind:data="data"></slot>
-                <!-- 最子層右邊的按鈕 -->
-                <th class="th-title-2" colspan="2">
-                    子項目
-                    <div class="btn-01-add float-right"><a v-on:click="data.isSubOpen = !data.isSubOpen"><span v-text="data.isSubOpen?'收合':'展開'"></span></a></div>
-                </th>
-            </tr>
-                <!-- 不展開時的顯示畫面 -->
+            <transition name="fade">
+                <tr v-show="data.isDetailOpen">
+                    <slot name="SecondDetailHead" v-bind:data="data"></slot>
+                </tr>
+            </transition>
+            <transition name="fade">
+                <tr v-show="data.isDetailOpen">
+                    <slot name="SecondDetail" v-bind:data="data"></slot>
+                </tr>
+            </transition>
+            <transition name="fade">
+                <tr v-show="data.isDetailOpen">
+                    <slot name="ThirdHead" v-bind:data="data"></slot>
+                    <!-- 最子層右邊的按鈕 -->
+                    <th class="th-title-1">
+                        <div class="btn-01-add float-right"><a v-on:click="data.isSubOpen = !data.isSubOpen"><span
+                                    v-text="data.isSubOpen?'收合':'展開'"></span></a></div>
+                    </th>
+                </tr>
+            </transition>
+            <!-- 不展開時的顯示畫面 -->
             <tr class="InnerDetailShowBar" v-show="data.isDetailOpen && !data.isSubOpen">
-                <td colspan="7" class="text-center">
+                <td colspan="8" class="text-center">
                     <b class="undone-text">請展開檢視更多項目...</b>
                 </td>
             </tr>
@@ -54,12 +59,12 @@
             </tr>
         </tbody>
     </table>
-</template>
+    </template>
 <script>
 import tableData from '../data/codegentable.json'
 import  _ from 'lodash'
 export default {
-        props:{tableData:Array,dataObj:Object},
+        props:{tableData:Array,dataObj:Object,addIcon:false,delIcon:false},
         data(){
         return {isAllOpen: true,datas:[]}
         },
@@ -105,3 +110,11 @@ export default {
     }
 }
 </script>
+<style>
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
+}
+</style>

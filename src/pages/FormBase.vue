@@ -47,14 +47,14 @@
                                     <textarea class="tt resize-none" id="remodalSendDescription" placeholder="請填寫意見說明"></textarea>
                                 </div>
                             </Remodal> 
-                            <ButtonAction bgColor="btn-02-blue"  iconName="icon-search" @click="openRemodal('remodal-02')">客制化Remodal</ButtonAction>
+                            <ButtonAction bgColor="btn-02-blue"  iconName="icon-search" @click="openRemodal('remodal-02')">客制化Remodal一</ButtonAction>
                             <Remodal remodalId="remodal-03" title="客制化">
                                 <div class="col-sm-12 m-top10">
                                     <div class="popup-input-title">簽核意見(最多50字)</div>
                                     <textarea class="tt resize-none" id="remodalSendDescription" placeholder="請填寫意見說明"></textarea>
                                 </div>
                             </Remodal> 
-                            <ButtonAction bgColor="btn-02-blue"  iconName="icon-search" @click="openRemodal('remodal-03')">客制化Remodal</ButtonAction>
+                            <ButtonAction bgColor="btn-02-blue"  iconName="icon-search" @click="openRemodal('remodal-03')">客制化Remodal二</ButtonAction>
                         </div>
                         <!-- icon-search,icon-plus,glyphicon glyphicon-remove- -->
                 </div>

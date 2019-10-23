@@ -9,7 +9,7 @@
 
     <div class="nav-info-box">
       <p>
-        <router-link to="/codegen">程式產生控件</router-link>
+        <router-link to="/purchaseorder">採購單</router-link>
       </p>
       <p>
         <router-link to="/formbase">基本控件</router-link>

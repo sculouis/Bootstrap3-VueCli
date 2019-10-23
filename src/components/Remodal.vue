@@ -30,6 +30,7 @@ export default {
         confirm(e){
             console.log(`press confirm button -> remodalId:${this.remodalId}`)
             console.log(e)
+            this.$emit('accept','選擇結果')
         },
         cancel(e){
             console.log(`press cancel button -> remodalId:${this.remodalId}`)
