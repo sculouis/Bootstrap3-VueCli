@@ -9,7 +9,8 @@ const state = {
         addressDatas:[],
         prDatas:[],
         quoteDatas:[],
-        supplierDatas:[]
+        supplierDatas:[],
+        invoiceDatas:[]
     }
     //取得屬性
 const  getters ={
@@ -53,6 +54,10 @@ const  getters ={
         //報價經辦資料
         quoteDatas(state){
             return state.quoteDatas
+        },
+        //發票管理人資料
+        invoiceDatas(state){
+            return state.invoiceDatas
         }
     }
     //註冊要update值的方法類似event,用commit呼叫
@@ -80,6 +85,10 @@ const  mutations = {
         quote(state,res){
             state.quoteDatas = res.data
             $.unblockUI('')
+        },
+        //發票管理人
+        invoice(state,res){
+            state.invoiceDatas = res.data
         }
     }
     const actions = {
@@ -119,6 +128,12 @@ const  mutations = {
             axios.get(urlCodeResult +'?kind=quote')
             .then(response => {
                 context.commit("quote",response)
+            })
+            .catch(err => console.log(err))
+            //發票管理人
+            axios.get(urlCodeResult +'?kind=invoice')
+            .then(response => {
+                context.commit("invoice",response)
             })
             .catch(err => console.log(err))
         }

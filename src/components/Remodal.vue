@@ -24,16 +24,21 @@ import { METHODS } from 'http';
 export default {
     props:{remodalId:String,title:String},
     data(){
-        return {}
+        return {
+            rid:""
+        }
+    },
+    mounted(){
+        this.rid = this.remodalId
     },
     methods:{
         confirm(e){
-            console.log(`press confirm button -> remodalId:${this.remodalId}`)
+            console.log(`press confirm button -> remodalId:${this.rid}`)
             console.log(e)
             this.$emit('accept','選擇結果')
         },
         cancel(e){
-            console.log(`press cancel button -> remodalId:${this.remodalId}`)
+            console.log(`press cancel button -> remodalId:${this.rid}`)
             console.log(e)
         }
     }

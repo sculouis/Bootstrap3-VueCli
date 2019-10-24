@@ -1,5 +1,5 @@
 <template>
-    <div class="disable-text" v-if="text === undefined">
+    <div class="disable-text" v-if="text === undefined || text === ''">
         <span class="undone-text">{{placeHolder}}</span>
     </div>
     <div class="disable-text" v-else>

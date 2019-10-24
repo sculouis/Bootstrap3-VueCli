@@ -1,5 +1,5 @@
 <template>
-    <select v-bind:id="myid"  v-model="val" v-on="inputListeners" data-hide-disabled="true" data-size="10" tabindex="-98" class="selectpicker show-tick form-control"  :class="{'select-h30':smallSize}"  data-live-search="true" title="請選擇">
+    <select v-bind:id="myid"  v-model="val" v-on="inputListeners" data-hide-disabled="true" data-size="10" tabindex="-98" class="selectpicker show-tick form-control "  :class="[small ? selectH30:selectH38]"  data-live-search="true" title="請選擇">
             <option selected value="-1">取消選擇</option>
             <template v-for="item in items">
                     <option :key="item.value" :value="item.value" v-text="item.text"></option>
@@ -22,7 +22,9 @@
                 val: "",
                 myid: "",
                 selectDatas:[],
-                small: false
+                small: false,
+                selectH30:'select-h30',
+                selectH38:'select-h38',
             };
         },
         mounted() {
