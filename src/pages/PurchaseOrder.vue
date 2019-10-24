@@ -196,7 +196,7 @@
             <div class="row">
                 <div class="col-sm-12 content-box">
                     <div class="w100 title">明細表</div>
-            <table-base :tableData="noDelData" :addIcon="showAddIcon" :delIcon="showDelIcon">
+            <table-base :tableData="noDelDataSelected" :addIcon="showAddIcon" :delIcon="showDelIcon">
                         <template slot="FirstHead">
                                 <th class="th-title w5">編號</th>
                                 <th class="th-title">採購分類</th>
@@ -209,15 +209,15 @@
                                 </th>
                         </template>
                         <template v-slot:FirstDetail="{ data,index }">
-                                <td rowspan="999" class="DetailSerno text-center">
-                                    1
+                                <td rowspan="999" class="DetailSerno text-center" v-text="index + 1">
+                                    
                                 </td>
-                                <td>辦公室用具</td>
-                                <td>桌子</td>
-                                <td>6</td>
-                                <td>張</td>
+                                <td v-text="data.category"></td>
+                                <td v-text="data.itemDescription"></td>
+                                <td v-text="data.amount"></td>
+                                <td v-text="data.unitName"></td>
                                 <td>
-                                    <input type="text" class="input h30" placeholder="請輸入金額">
+                                    <text-number v-model="data.unitAmount" :smallSize="true" ></text-number>
                                 </td>
                                 <td>
                                     <b class="undone-text">系統自動帶入</b>
@@ -228,8 +228,8 @@
                                 <th class="th-title-1" colspan="4">最低報價</th>
                         </template>
                         <template v-slot:SecondDetail="{ data }">
-                                <td colspan="2">7,845,123</td>
-                                <td colspan="4">是</td>
+                                <td colspan="2" v-text="data.originalQuote"></td>
+                                <td colspan="4" v-text="data.minQuote?'是':'否'"></td>
                         </template>
                         <template v-slot:ThirdHead="{ data }">
                                 <th class="th-title-1">送貨數量</th>
@@ -241,13 +241,13 @@
                         </template>
                         <template v-slot:ThirdDetail="{data, subdata,index }">
                                 <td>
-                                    <input type="text" placeholder="請輸入數量" class="input h30">
+                                    <text-number v-model="subdata.receiveAmount" :smallSize="true" ></text-number>
                                 </td>
                                 <td>
                                     <b class="undone-text">系統自動帶入</b>
                                 </td>
-                                <td colspan="3">1399-ZZ分行</td>
-                                <td colspan="2">1399-ZZ分行</td>
+                                <td colspan="3" v-text="subdata.paymentDep"></td>
+                                <td colspan="2" v-text="subdata.receiveDep"></td>
                         </template>
                     </table-base>
                 </div>
@@ -264,6 +264,7 @@ import ButtonAction from '../components/ButtonAction.vue'
 import Selecter from '../components/Selecter.vue'
 import Remodal from '../components/Remodal.vue'
 import TextString from '../components/TextString.vue'
+import TextNumber from '../components/TextNumber.vue'
 import TableBase from '../components/TableBase.vue'
 import LinksPeo from '../components/LinksPeo.vue'
 import { mapMutations, mapGetters, mapActions } from 'vuex'
@@ -276,6 +277,7 @@ export default {
         Selecter,
         Remodal,
         TextString,
+        TextNumber,
         TableBase,
         LinksPeo
     },
@@ -358,7 +360,12 @@ export default {
         }
     }
     },
-    computed:{...mapGetters('po',['noDelData','addressDatas','prDatas','quoteDatas','supplierDatas','invoiceDatas'])}
+    computed:{...mapGetters('po',['noDelData','addressDatas','prDatas','quoteDatas','supplierDatas','invoiceDatas']),
+        noDelDataSelected(){
+            const selected = this.noDelData.filter(item => item.sel === true)
+            return selected
+        }
+    }
 }
 </script>
 <style>
