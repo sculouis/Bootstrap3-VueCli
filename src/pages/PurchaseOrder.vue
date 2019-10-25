@@ -67,7 +67,7 @@
                     <div class="w100 title m-top10">
                         <b class="float-left">請購單明細</b>
                     </div>
-                    <table-base :tableData="noDelData" :dataObj="dataObj" @addObject="addData" @delObject="delData"
+                    <table-base :tableData="purchaseDatas" :dataObj="dataObj" @addObject="addData" @delObject="delData"
                         :addIcon="showAddIcon" :delIcon="showDelIcon">
                         <template slot="FirstHead">
                             <th class="th-title w5">選擇</th>
@@ -122,7 +122,7 @@
                     <div class="btn-02-add" @click="genPo()"><a>
                             <p><b>建立明細</b></p>
                         </a></div>
-                    <pre style="margin-top: 25px" v-show="trace">{{this.noDelData}}</pre>
+                    <pre style="margin-top: 25px" v-show="trace">{{this.purchaseDatas}}</pre>
                 </div>
             </div>
         </box>
@@ -305,7 +305,7 @@ export default {
     mounted(){
         this.getSupplier()
     },
-    methods:{...mapMutations('forms',['openRemodal']),...mapActions('po',['prData','getAddress','searchListDatas','getSupplier']),
+    methods:{...mapMutations('forms',['openRemodal']),...mapActions('po',['getPurchase','getAddress','searchListDatas','getSupplier']),
     addressChange(e){
         if (Number(e) > 0 ){
             this.supplierResult = true
@@ -325,8 +325,8 @@ export default {
         console.log(e)
     },
     search(){
-        $.blockUI({message:"資料讀取中...."})
-        this.prData()
+        $.blockUI({message:"請購單資料讀取中...."})
+        this.getPurchase()
         this.searchResult = true
     },
     addData(){
@@ -354,15 +354,15 @@ export default {
         this.invoiceEmp = `${sel.text}(${sel.value})`
         console.log(`發票管理人選擇結果：${sel.value} - ${sel.text}`)
     },
-    deliveryChange(data,subdata){
+    deliveryChange(data,subdata){  //送貨層任一為false則直屬明細層為false
         if (subdata.raChk === false){
             data.sel = false
         }
     }
     },
-    computed:{...mapGetters('po',['noDelData','addressDatas','prDatas','quoteDatas','supplierDatas','invoiceDatas']),
-        noDelDataSelected(){
-            const selected = this.noDelData.filter(item => item.sel === true)
+    computed:{...mapGetters('po',['purchaseDatas','addressDatas','prDatas','quoteDatas','supplierDatas','invoiceDatas']),
+        noDelDataSelected(){  //取得請購明細資料
+            const selected = this.purchaseDatas.filter(item => item.sel === true)
             return selected
         }
     }

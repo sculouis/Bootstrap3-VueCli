@@ -17,7 +17,7 @@ const  getters ={
         dataLength(state) {
             return state.model.length + 1
         },
-        noDelData(state) {
+        purchaseDatas(state) {
             //明細選擇後送貨層資料全部選擇
             state.model.forEach(element => {
                 if (element.sel === true){
@@ -63,7 +63,7 @@ const  getters ={
     //註冊要update值的方法類似event,用commit呼叫
 const  mutations = {
         //請購單資料填入
-        prData(state, res) {
+        purchaseData(state, res) {
             state.model = res.data
             $.unblockUI('')
         },
@@ -93,10 +93,10 @@ const  mutations = {
     }
     const actions = {
         //取得查詢請購單資料
-        prData(context) {
+        getPurchase(context) {
             axios.get(urlPrResult)
             .then(response => {
-                context.commit("prData",response)
+                context.commit("purchaseData",response)
             })
             .catch(err => console.log(err))
         },
